@@ -1,0 +1,38 @@
+export const mockPosts = [
+  {
+    id: 1,
+    title: "Renovating The Belle House: Phase One",
+    excerpt: "From navy blue cabinets to butcher block counters, here is how we transformed our kitchen...",
+    author: "Chris",
+    date: "2025-05-16",
+    category: "Renovation",
+    image: "https://placehold.co/800x400/2c3e50/FFF?text=Renovation+Project",
+  },
+  {
+    id: 2,
+    title: "The Ultimate Vegan Breakfast",
+    excerpt: "Who said plant-based breakfasts are boring? Try this oil-free hash recipe...",
+    author: "Chris",
+    date: "2025-06-02",
+    category: "Recipes",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: 3,
+    title: "Why React is Better than WordPress",
+    excerpt: "We are building our own digital empire, and here is why we ditched the old CMS...",
+    author: "Emma",
+    date: "2025-11-20",
+    category: "Tech",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800",
+  },
+  {
+    id: 4,
+    title: "Kitchen Kombat: Dev Diary #1",
+    excerpt: "The first steps in building our card battler game using JavaScript...",
+    author: "Chris",
+    date: "2025-10-15",
+    category: "Gaming",
+    image: "https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&q=80&w=800",
+  },
+];
