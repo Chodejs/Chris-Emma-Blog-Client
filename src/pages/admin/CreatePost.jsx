@@ -14,6 +14,33 @@ const CreatePost = () => {
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false); // <--- Loading State
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('image', file);
+
+    try {
+        setIsSubmitting(true); // Reuse loading state
+        const response = await api.post('/post/upload.php', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        
+        // The PHP script returns { url: "..." }
+        setImage(response.data.url); 
+        alert("Image Uploaded!");
+        
+    } catch (err) {
+        console.error("Upload Error", err);
+        alert("Upload Failed");
+    } finally {
+        setIsSubmitting(false);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -86,13 +113,28 @@ const CreatePost = () => {
             </div>
 
             <div className="form-group">
-            <label>Image URL (Optional)</label>
-            <input 
-                type="text" 
-                value={image} 
-                onChange={(e) => setImage(e.target.value)} 
-                placeholder="https://..."
-            />
+                <label>Cover Image</label>
+                
+                {/* 1. File Input */}
+                <input 
+                    type="file" 
+                    onChange={handleFileChange}
+                    accept="image/*"
+                />
+
+                {/* 2. Hidden Input (Stores the URL after upload) */}
+                <input 
+                    type="hidden" 
+                    value={image} 
+                />
+
+                {/* 3. Preview (Shows the image if one is uploaded) */}
+                {image && (
+                    <div style={{marginTop: '10px'}}>
+                        <img src={image} alt="Preview" style={{width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '5px'}} />
+                        <p style={{fontSize: '0.8rem', color: '#7f8c8d'}}>URL: {image}</p>
+                    </div>
+                )}
             </div>
         </div>
 

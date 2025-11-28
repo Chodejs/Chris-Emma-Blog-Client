@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import api from '../api/axios';
 import './Login.css';
 
 const Login = () => {
@@ -12,23 +13,38 @@ const Login = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); // Clear previous errors
     
-    // MOCK AUTHENTICATION CHECK
-    // In the real world, this would be an Axios post to your PHP API
-    if (formData.username === 'admin' && formData.password === 'password') {
-      // 1. Save fake token
-      localStorage.setItem('token', '123456-fake-token');
-      localStorage.setItem('user', JSON.stringify({ name: 'Chris', role: 'admin' }));
+    try {
+      // 1. Send Post Request to PHP
+      const response = await api.post('/login.php', {
+        username: formData.username,
+        password: formData.password
+      });
+
+      // 2. If successful (Axios throws error if 401/400, so we are good here)
+      const { user, token } = response.data;
+
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
       
-      // 2. Redirect to Admin Dashboard
+      // 3. Redirect
       navigate('/admin');
-      
-      // 3. Force a reload so Navbar updates (We will fix this with Context later!)
       window.location.reload(); 
-    } else {
-      setError('Invalid credentials. Try "admin" and "password".');
+
+    } catch (err) {
+      console.error("Login Error:", err);
+      if (!err?.response) {
+          setError('No Server Response');
+      } else if (err.response?.status === 400) {
+          setError('Missing Username or Password');
+      } else if (err.response?.status === 401) {
+          setError('Invalid Username or Password');
+      } else {
+          setError('Login Failed');
+      }
     }
   };
 
