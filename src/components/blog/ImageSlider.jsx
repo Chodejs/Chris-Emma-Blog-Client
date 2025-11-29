@@ -6,6 +6,11 @@ import './ImageSlider.css';
 
 const ImageSlider = ({ slides }) => {
   const [current, setCurrent] = useState(0);
+  
+  if (!Array.isArray(slides) || slides.length <= 0) {
+    return null;
+  }
+
   const length = slides.length;
 
   const nextSlide = () => {
@@ -16,9 +21,16 @@ const ImageSlider = ({ slides }) => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  if (!Array.isArray(slides) || slides.length <= 0) {
-    return null;
-  }
+  // Helper to safely extract the first image URL from a slide
+  const getSlideImage = (imgData) => {
+    if (!imgData) return 'https://placehold.co/1200x600?text=No+Image';
+    try {
+        const parsed = JSON.parse(imgData);
+        return Array.isArray(parsed) ? parsed[0] : parsed;
+    } catch (e) {
+        return imgData;
+    }
+  };
 
   return (
     <section className="slider">
@@ -37,15 +49,18 @@ const ImageSlider = ({ slides }) => {
                   transition={{ duration: 0.8 }}
                   className="slider-content"
                 >
-                  <img src={slide.image} alt="travel image" className="image" />
+                  {/* FIX: Parse the image string before using it */}
+                  <img src={getSlideImage(slide.image)} alt="slider visual" className="image" />
                   
-                  <div className="slider-overlay">
-                    <h2>{slide.title}</h2>
-                    <p>{slide.excerpt.substring(0, 100)}...</p>
-                    <Link to={`/post/${slide.id}`} className="slider-btn">
-                      Read Article
-                    </Link>
-                  </div>
+                  {slide.title && (
+                    <div className="slider-overlay">
+                        <h2>{slide.title}</h2>
+                        <p>{slide.excerpt ? slide.excerpt.substring(0, 100) + '...' : ''}</p>
+                        <Link to={`/post/${slide.id}`} className="slider-btn">
+                        Read Article
+                        </Link>
+                    </div>
+                  )}
                 </motion.div>
               )}
             </div>
@@ -53,7 +68,6 @@ const ImageSlider = ({ slides }) => {
         })}
       </AnimatePresence>
       
-      {/* Optional: Dots at the bottom */}
       <div className="slider-dots">
         {slides.map((_, index) => (
             <span 

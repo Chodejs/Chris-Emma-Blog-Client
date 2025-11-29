@@ -1,12 +1,30 @@
+/* Ensure the cards pop against the background */
+.home-container {
+    padding-bottom: 4rem;
+    background-color: #f4f6f7; /* Light grey background for the whole page */
+    min-height: 100vh;
+}
+
+.home-container {
+    padding-bottom: 4rem;
+}
+
 .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
+/* HERO SLIDER ADJUSTMENTS */
+.hero-section {
+    width: 100%;
+    margin-bottom: 4rem; /* More space below slider */
+}
+
+/* HOME HEADER */
 .home-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 .home-header h1 {
@@ -15,12 +33,12 @@
     font-family: 'Georgia', serif;
 }
 
-/* Category Tabs */
+/* CATEGORY TABS */
 .category-tabs {
     display: flex;
     justify-content: center;
     gap: 10px;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     flex-wrap: wrap;
 }
 
@@ -46,10 +64,10 @@
     color: white;
 }
 
+
 .no-results {
     text-align: center;
-    width: 100%;
-    grid-column: 1 / -1; /* Span all columns */
+    grid-column: 1 / -1;
     padding: 2rem;
     color: #7f8c8d;
 }
@@ -61,4 +79,27 @@
     color: #3498db;
     text-decoration: underline;
     cursor: pointer;
+}
+
+/* BLOG GRID - The "Auto-Fit" Fix */
+.blog-grid {
+    display: grid;
+    /* CHANGE 1: auto-fit stretches the cards to fill the empty white space */
+    /* CHANGE 2: Lowered min-width to 300px to prevent early wrapping on tablets */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 2rem;
+    margin-bottom: 4rem;
+    /* CHANGE 3: Center the whole grid content */
+    justify-content: center; 
+}
+
+/* RESPONSIVE FIXES */
+@media screen and (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr; /* Force single column on phones */
+    }
+    
+    .hero-section {
+        margin-bottom: 2rem;
+    }
 }

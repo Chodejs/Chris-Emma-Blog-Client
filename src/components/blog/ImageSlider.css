@@ -111,3 +111,24 @@
     background-color: #e67e22;
     transform: scale(1.2);
 }
+
+/* ... existing code ... */
+
+/* Mobile Responsive Slider */
+@media screen and (max-width: 768px) {
+    .slider {
+        height: 300px; /* Shorter height on phones so it doesn't take up the whole screen */
+    }
+
+    .slider-overlay {
+        padding: 20px; /* Less padding */
+    }
+
+    .slider-overlay h2 {
+        font-size: 1.5rem; /* Smaller title */
+    }
+
+    .slider-overlay p {
+        display: none; /* Hide excerpt on small screens to save space */
+    }
+}

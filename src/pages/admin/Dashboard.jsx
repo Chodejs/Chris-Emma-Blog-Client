@@ -48,6 +48,7 @@ const Dashboard = () => {
         </Link>
       </div>
 
+      <div className="dashboard-table-container">
       <table className="dashboard-table">
         <thead>
             <tr>
@@ -80,6 +81,7 @@ const Dashboard = () => {
             ))}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };

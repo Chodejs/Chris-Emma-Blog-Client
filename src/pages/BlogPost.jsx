@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async'; 
 import { FaArrowLeft, FaCalendar, FaUser } from 'react-icons/fa';
-import api from '../api/axios'; // <--- Use Real API
+import api from '../api/axios';
+import ImageSlider from '../components/blog/ImageSlider';
 import './BlogPost.css';
 
 const BlogPost = () => {
@@ -11,10 +12,10 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // 1. Fetch Data Logic (Restored)
   useEffect(() => {
     const fetchPost = async () => {
         try {
-            // Call the PHP Endpoint
             const response = await api.get(`/post/single_read.php?id=${id}`);
             
             if (response.data.message === 'Post Not Found') {
@@ -33,6 +34,24 @@ const BlogPost = () => {
     fetchPost();
   }, [id]);
 
+  // 2. Helper to parse images (New Feature)
+  const getImages = (imgData) => {
+    if (!imgData) return [];
+    try {
+        // Try parsing as JSON array
+        const parsed = JSON.parse(imgData);
+        if (Array.isArray(parsed)) {
+            // Convert to format ImageSlider expects: { image: 'url' }
+            return parsed.map(url => ({ image: url }));
+        }
+        // If valid JSON but not array, return single
+        return [{ image: parsed }];
+    } catch (e) {
+        // If not JSON, it's a plain string (Legacy URL)
+        return [{ image: imgData }];
+    }
+  };
+
   if (loading) return <div className="loading">Loading Article...</div>;
   
   if (error || !post) {
@@ -43,6 +62,9 @@ const BlogPost = () => {
       </div>
     );
   }
+
+  // Calculate images to display
+  const postImages = getImages(post.image);
 
   return (
     <div className="blog-post-container">
@@ -65,12 +87,18 @@ const BlogPost = () => {
         </div>
       </div>
 
-      {post.image && (
-          <img src={post.image} alt={post.title} className="post-hero-image" />
+      {/* RENDER SLIDER OR SINGLE IMAGE */}
+      {postImages.length > 0 && (
+          <div style={{ marginBottom: '2rem' }}>
+            {postImages.length > 1 ? (
+                 <ImageSlider slides={postImages} />
+            ) : (
+                 <img src={postImages[0].image} alt={post.title} className="post-hero-image" />
+            )}
+          </div>
       )}
 
       <div className="post-content">
-        {/* DANGEROUSLY SET HTML (Needed for Rich Text Editor content) */}
         <div dangerouslySetInnerHTML={{ __html: post.content }}></div>
       </div>
     </div>

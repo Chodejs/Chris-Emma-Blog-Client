@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaGithub, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaYoutube, FaInstagram, FaSpotify, FaFacebook, FaPatreon } from 'react-icons/fa'; 
 import './Footer.css';
 
 const Footer = () => {
@@ -42,9 +42,21 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Connect</h4>
           <div className="social-icons">
-            <FaGithub className="social-icon" />
-            <FaYoutube className="social-icon" />
-            <FaInstagram className="social-icon" />
+            {/* New Icons */}
+            <a href="https://open.spotify.com/user/31fwx2afcabguf4gr57ahpcdk5he" target="_blank" rel="noreferrer" title="Spotify">
+                <FaSpotify className="social-icon" />
+            </a>
+            <a href="https://www.facebook.com/chris.tow.52/" target="_blank" rel="noreferrer" title="Facebook">
+                <FaFacebook className="social-icon" />
+            </a>
+             <a href="https://www.patreon.com/c/plantbasedrunner" target="_blank" rel="noreferrer" title="Patreon">
+                <FaPatreon className="social-icon" />
+            </a>
+            
+            {/* Original Icons */}
+            <a href="https://github.com/chris-tow" target="_blank" rel="noreferrer"><FaGithub className="social-icon" /></a>
+            <a href="https://youtube.com/@TheChrisAndEmmaShow" target="_blank" rel="noreferrer"><FaYoutube className="social-icon" /></a>
+            <a href="https://instagram.com" target="_blank" rel="noreferrer"><FaInstagram className="social-icon" /></a>
           </div>
         </div>
       </div>

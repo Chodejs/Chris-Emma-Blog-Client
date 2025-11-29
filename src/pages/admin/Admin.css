@@ -51,6 +51,21 @@
     font-weight: bold;
 }
 
+/* Responsive Table Container */
+.dashboard-table-container {
+    overflow-x: auto; /* Allows table to scroll sideways on mobile */
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+/* Update dashboard-table to work inside container */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Forces table to keep its shape, triggering scroll */
+}
+
 .action-btn {
     padding: 5px 10px;
     margin-right: 5px;
@@ -97,3 +112,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
+
+
+

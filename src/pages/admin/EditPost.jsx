@@ -7,11 +7,11 @@ import './Admin.css';
 
 const EditPost = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Get ID from URL
+  const { id } = useParams();
   
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Tech');
-  const [image, setImage] = useState('');
+  const [images, setImages] = useState([]); // Array for images
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -22,11 +22,23 @@ const EditPost = () => {
             const response = await api.get(`/post/single_read.php?id=${id}`);
             const post = response.data;
             
-            // Populate form
             setTitle(post.title);
             setCategory(post.category);
-            setImage(post.image || ''); // Handle null images
             setContent(post.content);
+
+            // Handle Image Parsing
+            if (post.image) {
+                try {
+                    const parsed = JSON.parse(post.image);
+                    if (Array.isArray(parsed)) {
+                        setImages(parsed);
+                    } else {
+                        setImages([post.image]); // Single image string -> Array
+                    }
+                } catch (e) {
+                    setImages([post.image]); // Not JSON -> Array
+                }
+            }
         } catch (err) {
             console.error("Error fetching post:", err);
             alert("Could not load post data.");
@@ -36,15 +48,50 @@ const EditPost = () => {
     fetchPost();
   }, [id, navigate]);
 
+  // Handle New File Uploads
+  const handleFileChange = async (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    setIsSubmitting(true);
+    const newImageUrls = [];
+
+    try {
+        for (const file of files) {
+            const formData = new FormData();
+            formData.append('image', file);
+
+            const response = await api.post('/post/upload.php', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+            newImageUrls.push(response.data.url);
+        }
+        // Add new images to existing list
+        setImages(prev => [...prev, ...newImageUrls]); 
+        alert(`${newImageUrls.length} Image(s) Added!`);
+        
+    } catch (err) {
+        console.error("Upload Error", err);
+        alert("Upload Failed");
+    } finally {
+        setIsSubmitting(false);
+    }
+  };
+
+  // Remove an image from the list
+  const removeImage = (indexToRemove) => {
+      setImages(images.filter((_, index) => index !== indexToRemove));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
     const updatedPost = {
-      id, // We must include the ID for the backend to know what to update
+      id,
       title,
       category,
-      image,
+      image: JSON.stringify(images), // Convert array back to JSON string
       content,
       author: 'Chris'
     };
@@ -99,16 +146,41 @@ const EditPost = () => {
                 <option value="Recipes">Recipes</option>
                 <option value="Gaming">Gaming</option>
                 <option value="Life">Life</option>
+                <option value="Fitness">Fitness</option>
             </select>
             </div>
 
             <div className="form-group">
-            <label>Image URL</label>
-            <input 
-                type="text" 
-                value={image} 
-                onChange={(e) => setImage(e.target.value)} 
-            />
+                <label>Manage Images</label>
+                
+                {/* File Input */}
+                <input 
+                    type="file" 
+                    onChange={handleFileChange}
+                    accept="image/*"
+                    multiple 
+                    style={{marginBottom: '10px'}}
+                />
+
+                {/* Image List with Delete Capability */}
+                <div style={{display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '10px'}}>
+                    {images.map((img, index) => (
+                        <div key={index} style={{position: 'relative'}}>
+                            <img src={img} alt={`Slide ${index}`} style={{width: '100px', height: '100px', objectFit: 'cover', borderRadius: '5px', border: '1px solid #ddd'}} />
+                            <button 
+                                type="button"
+                                onClick={() => removeImage(index)}
+                                style={{
+                                    position: 'absolute', top: '-5px', right: '-5px', 
+                                    background: 'red', color: 'white', borderRadius: '50%', 
+                                    width: '20px', height: '20px', border: 'none', 
+                                    cursor: 'pointer', fontSize: '12px', display: 'flex', 
+                                    alignItems: 'center', justifyContent: 'center'
+                                }}
+                            >X</button>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
 
