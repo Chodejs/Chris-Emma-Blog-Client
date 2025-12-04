@@ -44,70 +44,43 @@
   font-size: 1.8rem;
   cursor: pointer;
 }
+
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   .nav-menu {
     display: flex;
     flex-direction: column;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+    
+    /* Layout & Positioning */
     width: 250px; /* Fixed drawer width */
-    height: calc(100vh - 60px); 
+    height: calc(100vh - 60px); /* Fits exactly under navbar */
     position: absolute;
     top: 60px; 
     left: -100%; /* Hide off-screen */
+    
+    /* Appearance */
     background-color: #2c3e50;
     box-shadow: 2px 0 10px rgba(0,0,0,0.3);
     transition: all 0.4s ease;
+    
+    /* Alignment & Spacing */
     align-items: center;
     justify-content: flex-start; 
-    padding: 2rem 0;
+    padding: 2rem 0; /* Vertical padding only, removes left indentation */
     margin: 0;
     gap: 2rem;
+    
+    /* Touch Behaviors (The "Groovy" Fix) */
     touch-action: pan-y; 
     overscroll-behavior: contain;
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-    /* FIX 1: Make it a sidebar (250px), not full screen */
-    width: 100px; 
-    height: 100vh; /* Full screen height */
-    position: absolute;
-    top: 60px; /* Push it below the navbar */
-    
-    /* FIX 2: Move it completely off-screen (-250px) */
-    left: -100%; 
-    
-    background-color: #2c3e50;
-    transition: all 0.5s ease;
-    
-    /* FIX 3: Align items to the top, not the center */
-    align-items: center;
-    justify-content: flex-start; 
-    padding-top: 3rem; /* Give the links some breathing room from the top */
-    gap: 2rem;
-    
-    /* Optional: Add a shadow so it looks like it's floating above the content */
-    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   }
 
   .nav-menu.active {
     left: 0; /* Slide in */
   }
 
-  /* THE FIX: Pin the icon to the right so it can't disappear */
+  /* Pin the icon to the right so it can't disappear */
   .menu-icon {
-<<<<<<< Updated upstream
     display: block;
     position: absolute;
     top: 1rem;
@@ -116,16 +89,6 @@
     cursor: pointer;
     color: #ecf0f1;
     z-index: 1001; /* Ensure it stays on top */
-=======
-    display: block; /* Show the hamburger */
-    color: white;
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
   }
   
   .nav-item {
@@ -143,10 +106,10 @@
     width: 100%;
     height: 100vh;
     background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 998; /* Below menu (z-index 1000 usually) but above content */
+    z-index: 998; /* Below menu but above content */
     backdrop-filter: blur(2px); /* Nice blur effect */
-    /* Allows vertical scroll (pan-y) but DISABLES browser horizontal swipe handling */
+    
+    /* Touch Handling */
     touch-action: pan-y; 
-    /* Prevents scroll chaining to the parent body */
     overscroll-behavior: contain;
 }
