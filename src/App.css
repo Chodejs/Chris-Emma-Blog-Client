@@ -1,7 +1,22 @@
 #root {
+  /* Removed the default padding so the Navbar can be full-width */
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  text-align: center;
+}
+
+/* New container class to manage spacing */
+.main-content {
+  padding: 20px;
+  min-height: 80vh;
+}
+
+/* Mobile Adjustment */
+@media screen and (max-width: 768px) {
+  .main-content {
+    /* Push content down by 80px (60px navbar + 20px breathing room) */
+    padding-top: 80px; 
+  }
 }
 
 .logo {

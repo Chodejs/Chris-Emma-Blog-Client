@@ -71,3 +71,31 @@
     color: #7f8c8d;
     font-size: 0.9rem;
 }
+
+.social-icons a {
+    color: #bdc3c7;
+    text-decoration: none;
+    display: flex; /* Helps align the icon */
+    align-items: center;
+}
+
+.social-icons a:hover {
+    color: #e67e22;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        text-align: center; /* Center align text for mobile */
+        gap: 2.5rem;
+    }
+
+    .social-icons {
+        justify-content: center; /* Center the icons row */
+    }
+    
+    .footer-section h4 {
+        margin-bottom: 0.5rem; /* Tighter spacing on mobile */
+    }
+}

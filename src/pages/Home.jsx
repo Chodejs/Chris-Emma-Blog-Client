@@ -111,7 +111,7 @@ const Home = () => {
           
           <div className="category-tabs">
             {/* Added 'Life' and 'Fitness' to the list */}
-            {['All', 'Renovation', 'Recipes', 'Tech', 'Gaming', 'Life', 'Fitness'].map((cat) => (
+            {['All', 'Renovation', 'Recipes', 'Tech','Life'].map((cat) => (
               <button 
                 key={cat}
                 className={activeCategory === cat ? 'cat-btn active' : 'cat-btn'}

@@ -3,7 +3,7 @@ import { HelmetProvider } from 'react-helmet-async';
 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer'; 
-import ProtectedRoute from './components/layout/ProtectedRoute'; // <--- Import the Bouncer
+import ProtectedRoute from './components/layout/ProtectedRoute'; 
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -14,6 +14,9 @@ import BlogPost from './pages/BlogPost';
 import CreatePost from './pages/admin/CreatePost';
 import EditPost from './pages/admin/EditPost';
 
+// Import the updated CSS
+import './App.css'; 
+
 function App() {
   return (
     <HelmetProvider>
@@ -21,27 +24,27 @@ function App() {
         <div className="app-container">
           <Navbar />
           
-          <div style={{ padding: '20px', minHeight: '80vh' }}> 
+          {/* UPDATED: Use the class instead of inline styles */}
+          <div className="main-content"> 
             <Routes>
-              {/* PUBLIC ROUTES (Open to everyone) */}
+              {/* PUBLIC ROUTES */}
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/login" element={<Login />} />
               <Route path="/post/:id" element={<BlogPost />} />
 
-              {/* PROTECTED ROUTES ( VIP Only ) */}
+              {/* PROTECTED ROUTES */}
               <Route element={<ProtectedRoute />}>
                   <Route path="/admin" element={<Dashboard />} />
                   <Route path="/admin/create" element={<CreatePost />} /> 
                   <Route path="/admin/edit/:id" element={<EditPost />} />
               </Route>
 
-              {/* 404 Route */}
               <Route path="*" element={<NotFound />} />
-              
             </Routes>
           </div>
-            <Footer />
+          
+          <Footer />
         </div>
       </Router>
     </HelmetProvider>
