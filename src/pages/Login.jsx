@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import api from '../api/axios';
@@ -9,28 +9,33 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  // 1. AUTO-REDIRECT if already logged in
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/admin'); 
+    }
+  }, [navigate]);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Clear previous errors
+    setError('');
     
     try {
-      // 1. Send Post Request to PHP
       const response = await api.post('/login.php', {
         username: formData.username,
         password: formData.password
       });
 
-      // 2. If successful (Axios throws error if 401/400, so we are good here)
       const { user, token } = response.data;
 
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
       
-      // 3. Redirect
       navigate('/admin');
       window.location.reload(); 
 
@@ -55,7 +60,7 @@ const Login = () => {
       </Helmet>
 
       <div className="login-card">
-        <h2>Member Login</h2>
+        <h2>Authorized Access Only</h2>
         
         {error && <div className="error-msg">{error}</div>}
 
@@ -68,7 +73,7 @@ const Login = () => {
               className="form-input"
               value={formData.username}
               onChange={handleChange}
-              placeholder="Enter username"
+              placeholder="Enter credentials"
             />
           </div>
 
@@ -85,7 +90,7 @@ const Login = () => {
           </div>
 
           <button type="submit" className="login-btn">
-            Sign In
+            Access Dashboard
           </button>
         </form>
       </div>

@@ -67,12 +67,19 @@
 }
 
 .action-btn {
-    padding: 5px 10px;
-    margin-right: 5px;
+    padding: 8px 12px;      /* Increased padding slightly */
+    margin-right: 10px;     /* <--- THIS ADDS THE GAP */
     border: none;
-    border-radius: 3px;
+    border-radius: 5px;     /* Softened edges */
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
+    display: inline-flex;   /* Aligns icons better */
+    align-items: center;
+    gap: 5px;               /* Gap between icon and text inside button */
+}
+
+.action-btn:last-child {
+    margin-right: 0;
 }
 
 .edit-btn { background-color: #f39c12; color: white; }

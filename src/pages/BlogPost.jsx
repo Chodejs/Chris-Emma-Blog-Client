@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { FaArrowLeft, FaCalendar, FaUser } from 'react-icons/fa';
 import api from '../api/axios';
 import ImageSlider from '../components/blog/ImageSlider';
+import { formatDate, decodeHtml } from '../utils/helpers'; // <--- THIS WAS MISSING!
 import './BlogPost.css';
 
 const BlogPost = () => {
@@ -65,13 +66,30 @@ const BlogPost = () => {
 
   // Calculate images to display
   const postImages = getImages(post.image);
+  const heroImage = postImages.length > 0 ? postImages[0].image : 'https://chrisandemmashow.com/default-share-image.jpg'; // Fallback image
+  const cleanTitle = decodeHtml(post.title);
+  const cleanDesc = post.content.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...';
+  const postUrl = window.location.href; // Gets the current URL
 
   return (
     <div className="blog-post-container">
       <Helmet>
-        <title>{post.title} | Chris & Emma Press</title>
-        {/* Strip HTML tags for the meta description */}
-        <meta name="description" content={post.content.replace(/<[^>]*>?/gm, '').substring(0, 150)} />
+        {/* Standard Metadata */}
+        <title>{cleanTitle} | The Chris & Emma Show</title>
+        <meta name="description" content={cleanDesc} />
+
+        {/* Open Graph / Facebook / LinkedIn */}
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={postUrl} />
+        <meta property="og:title" content={cleanTitle} />
+        <meta property="og:description" content={cleanDesc} />
+        <meta property="og:image" content={heroImage} />
+
+        {/* Twitter (X) Cards */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={cleanTitle} />
+        <meta name="twitter:description" content={cleanDesc} />
+        <meta name="twitter:image" content={heroImage} />
       </Helmet>
 
       <Link to="/" className="back-button">

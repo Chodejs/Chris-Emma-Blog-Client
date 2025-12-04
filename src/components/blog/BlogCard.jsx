@@ -1,3 +1,4 @@
+import { formatDate, decodeHtml } from '../../utils/helpers';
 import {Link} from 'react-router-dom';
 import './BlogCard.css';
 
@@ -33,11 +34,11 @@ const BlogCard = ({post}) => {
 
             <div className="card-content">
                 <div className="card-meta">
-                    <span className="card-date">{post.date}</span>
-                    <span className="card-author">By {post.author}</span>
+                    <span className="card-date">{formatDate(post.date)}</span>
+                    <span className="card-author">By {post.author}</span>              
                 </div>
 
-                <h3 className="card-title">{post.title}</h3>
+                <h3 className="card-title">{decodeHtml(post.title)}</h3>
                 <p className="card-excerpt">{post.excerpt}</p>
 
                 <Link to={`/post/${post.id}`} className="card-btn">

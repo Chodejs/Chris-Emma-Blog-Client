@@ -1,3 +1,4 @@
+import { formatDate, decodeHtml } from '../utils/helpers';
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
 import BlogCard from '../components/blog/BlogCard';
@@ -20,16 +21,21 @@ const Home = () => {
       try {
         const response = await api.get('/post/read.php');
         if (Array.isArray(response.data)) {
-            setPosts(response.data);
-            setFilteredPosts(response.data);
+            // PRO MOVE: Clean the data immediately upon arrival
+            const cleanData = response.data.map(post => ({
+                ...post,
+                title: decodeHtml(post.title),
+                date: formatDate(post.date)
+            }));
+
+            setPosts(cleanData);
+            setFilteredPosts(cleanData);
         } else {
             setPosts([]); 
         }
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching posts:", err);
-        setError("Failed to load blog posts. Is the backend running?");
-        setLoading(false);
+        // ... (keep existing error handling)
       }
     };
 

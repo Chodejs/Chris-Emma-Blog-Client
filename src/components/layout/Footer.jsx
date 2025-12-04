@@ -11,8 +11,8 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Chris & Emma Press</h3>
           <p>
-            Building a digital empire, one component at a time. 
-            From vegan recipes to React tutorials, we cover it all.
+            Your hub for wellness, technology, and lifestyle. 
+            Built from scratch, powered by passion.
           </p>
         </div>
 
@@ -23,7 +23,8 @@ const Footer = () => {
             <li><Link to="/">Home</Link></li>
             <li><Link to="/about">About Us</Link></li>
             <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/login">Staff Login</Link></li>
+            {/* This link now auto-redirects to Dashboard if logged in */}
+            <li><Link to="/login">Staff Access</Link></li> 
           </ul>
         </div>
 
@@ -42,7 +43,6 @@ const Footer = () => {
         <div className="footer-section">
           <h4>Connect</h4>
           <div className="social-icons">
-            {/* New Icons */}
             <a href="https://open.spotify.com/user/31fwx2afcabguf4gr57ahpcdk5he" target="_blank" rel="noreferrer" title="Spotify">
                 <FaSpotify className="social-icon" />
             </a>
@@ -52,8 +52,6 @@ const Footer = () => {
              <a href="https://www.patreon.com/c/plantbasedrunner" target="_blank" rel="noreferrer" title="Patreon">
                 <FaPatreon className="social-icon" />
             </a>
-            
-            {/* Original Icons */}
             <a href="https://github.com/chris-tow" target="_blank" rel="noreferrer"><FaGithub className="social-icon" /></a>
             <a href="https://youtube.com/@TheChrisAndEmmaShow" target="_blank" rel="noreferrer"><FaYoutube className="social-icon" /></a>
             <a href="https://instagram.com" target="_blank" rel="noreferrer"><FaInstagram className="social-icon" /></a>
@@ -62,7 +60,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        &copy; {new Date().getFullYear()} Chris & Emma Press. Designed by Chris & Emma.
+        &copy; {new Date().getFullYear()} Chris & Emma Press. All rights reserved.
       </div>
     </footer>
   );

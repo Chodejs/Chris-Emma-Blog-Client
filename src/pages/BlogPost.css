@@ -68,15 +68,54 @@
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+/* CONTENT TYPOGRAPHY FIXES */
 .post-content {
   font-size: 1.2rem;
   line-height: 1.8;
   color: #333;
+  text-align: left; /* <--- CRITICAL: Forces text to read normally */
+  max-width: 100%;  /* Ensure it doesn't squish */
 }
 
-.post-content .lead {
-  font-size: 1.4rem;
-  font-style: italic;
-  color: #555;
-  margin-bottom: 2rem;
+.post-content h2,
+.post-content h3 {
+  color: #2c3e50;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-family: 'Georgia', serif;
+  line-height: 1.3;
 }
+
+.post-content p {
+  margin-bottom: 1.5rem;
+}
+
+/* FIX THE LISTS (The Ulanzi Bullet Points) */
+.post-content ul, 
+.post-content ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  display: block; /* Ensures list behaves like a block */
+}
+
+.post-content li {
+  margin-bottom: 0.8rem;
+  list-style-position: outside; /* Puts bullets outside the text block */
+}
+
+.post-content strong {
+  color: #2c3e50;
+  font-weight: 700;
+}
+/* 5. Blockquotes: If you ever use them, make them look fancy */
+.post-content blockquote {
+  border-left: 4px solid #e67e22;
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: #7f8c8d;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 0 5px 5px 0;
+}
+
