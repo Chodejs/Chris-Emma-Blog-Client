@@ -51,6 +51,7 @@
     flex-direction: column;
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     width: 250px; /* Fixed drawer width */
     height: calc(100vh - 60px); 
     position: absolute;
@@ -67,6 +68,8 @@
     touch-action: pan-y; 
     overscroll-behavior: contain;
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     /* FIX 1: Make it a sidebar (250px), not full screen */
@@ -90,6 +93,9 @@
     /* Optional: Add a shadow so it looks like it's floating above the content */
     box-shadow: 2px 0 10px rgba(0,0,0,0.3);
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -114,6 +120,9 @@
     display: block; /* Show the hamburger */
     color: white;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes

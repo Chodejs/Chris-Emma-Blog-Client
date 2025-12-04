@@ -2,6 +2,7 @@ import axios from 'axios';
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 // "import.meta.env" is how Vite accesses those .env files we made
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -14,6 +15,14 @@ const api = axios.create({
         'Pragma': 'no-cache',
         'Expires': '0',
     }
+=======
+// 1. Look for the environment variable first.
+// 2. If it's missing (like on your laptop), fallback to localhost.
+const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost/chris-emma-api/api';
+
+const api = axios.create({
+    baseURL: baseURL 
+>>>>>>> Stashed changes
 =======
 // 1. Look for the environment variable first.
 // 2. If it's missing (like on your laptop), fallback to localhost.
