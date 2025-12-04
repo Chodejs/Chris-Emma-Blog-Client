@@ -105,3 +105,25 @@ Edit & Delete: Verify the update.php and delete.php endpoints are working with t
 Search Functionality: Ensure the Search Bar logic filters the live data correctly.
 Deployment: Prepare for move to DreamHost (Environment variables, etc.).
 
+Major update to finalize MVP functionality and styling.
+
+FRONTEND (Layout & Polish):
+- Fixed "Squished" Layout: Removed default Vite styles in index.css/App.css that forced vertical centering. Site now scrolls naturally.
+- Responsive Design: Added max-width rules to BlogPost images so maps/photos shrink on mobile.
+- Home Page Grid: Switched to CSS Grid `auto-fit` to fix white space issues and center cards.
+- Image Handling: Updated BlogCard and ImageSlider to parse JSON image arrays and handle broken URLs with fallbacks.
+- Footer: Added Spotify, Facebook, and Patreon links.
+
+FEATURES:
+- Multi-Image Support: Updated Create/Edit Post to upload multiple files and store them as a JSON list.
+- Sliders: Single posts now auto-detect multiple images and render a slider.
+- Search Upgrade: Search bar now filters by Title, Category, AND Body text.
+- Categories: Added 'Fitness' and 'Life' to filtering and admin dropdowns.
+
+BACKEND (API & Database):
+- Security: Fixed `htmlspecialchars` issue on image arrays to prevent JSON corruption.
+- Excerpts: Added HTML entity decoding to `read.php` for cleaner post previews.
+- Fixes: Standardized column names (body vs content) in update scripts.
+
+ready for deployment prep! 🚀
+

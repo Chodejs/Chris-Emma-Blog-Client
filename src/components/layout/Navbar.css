@@ -44,12 +44,12 @@
   font-size: 1.8rem;
   cursor: pointer;
 }
-
 /* Mobile Responsiveness */
 @media screen and (max-width: 768px) {
   .nav-menu {
     display: flex;
     flex-direction: column;
+<<<<<<< Updated upstream
     width: 250px; /* Fixed drawer width */
     height: calc(100vh - 60px); 
     position: absolute;
@@ -65,6 +65,28 @@
     gap: 2rem;
     touch-action: pan-y; 
     overscroll-behavior: contain;
+=======
+    /* FIX 1: Make it a sidebar (250px), not full screen */
+    width: 100px; 
+    height: 100vh; /* Full screen height */
+    position: absolute;
+    top: 60px; /* Push it below the navbar */
+    
+    /* FIX 2: Move it completely off-screen (-250px) */
+    left: -100%; 
+    
+    background-color: #2c3e50;
+    transition: all 0.5s ease;
+    
+    /* FIX 3: Align items to the top, not the center */
+    align-items: center;
+    justify-content: flex-start; 
+    padding-top: 3rem; /* Give the links some breathing room from the top */
+    gap: 2rem;
+    
+    /* Optional: Add a shadow so it looks like it's floating above the content */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+>>>>>>> Stashed changes
   }
 
   .nav-menu.active {
@@ -73,6 +95,7 @@
 
   /* THE FIX: Pin the icon to the right so it can't disappear */
   .menu-icon {
+<<<<<<< Updated upstream
     display: block;
     position: absolute;
     top: 1rem;
@@ -81,6 +104,10 @@
     cursor: pointer;
     color: #ecf0f1;
     z-index: 1001; /* Ensure it stays on top */
+=======
+    display: block; /* Show the hamburger */
+    color: white;
+>>>>>>> Stashed changes
   }
   
   .nav-item {
