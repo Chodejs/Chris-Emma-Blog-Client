@@ -1,0 +1,124 @@
+/* Admin Global Layout */
+.admin-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: white;
+    min-height: 80vh;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    border-radius: 8px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
+}
+
+.create-btn {
+    background-color: #27ae60;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.create-btn:hover {
+    background-color: #2ecc71;
+}
+
+/* Dashboard Table */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-table th, 
+.dashboard-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.dashboard-table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+/* Responsive Table Container */
+.dashboard-table-container {
+    overflow-x: auto; /* Allows table to scroll sideways on mobile */
+    margin-bottom: 2rem;
+    border: 1px solid #eee;
+    border-radius: 8px;
+}
+
+/* Update dashboard-table to work inside container */
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Forces table to keep its shape, triggering scroll */
+}
+
+.action-btn {
+    padding: 8px 12px;      /* Increased padding slightly */
+    margin-right: 10px;     /* <--- THIS ADDS THE GAP */
+    border: none;
+    border-radius: 5px;     /* Softened edges */
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;   /* Aligns icons better */
+    align-items: center;
+    gap: 5px;               /* Gap between icon and text inside button */
+}
+
+.action-btn:last-child {
+    margin-right: 0;
+}
+
+.edit-btn { background-color: #f39c12; color: white; }
+.delete-btn { background-color: #e74c3c; color: white; }
+
+/* Editor Form Styles */
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.editor-box {
+    height: 300px;
+    margin-bottom: 50px; /* Space for the toolbar */
+}
+
+.save-btn {
+    background-color: #2980b9;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    float: right;
+}
+
+.cancel-btn {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+

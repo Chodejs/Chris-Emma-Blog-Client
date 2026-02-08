@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await api.get('/post/read.php');
+        const response = await api.get('/posts');
         if (Array.isArray(response.data)) {
             // PRO MOVE: Clean the data immediately upon arrival
             const cleanData = response.data.map(post => ({

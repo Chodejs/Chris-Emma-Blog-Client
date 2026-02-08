@@ -1,0 +1,60 @@
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+.search-input {
+  /* YOUR FIX: Reduced width to prevent overflow */
+  width: 80%; 
+  
+  /* Recommended: Centers the smaller bar */
+  display: block;
+  margin: 0 auto;
+  
+  padding: 15px 20px 15px 45px; /* Left padding for icon */
+  border: 2px solid #ecf0f1;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  outline: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.search-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px; /* You might need to adjust this if the bar is centered now */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #bdc3c7;
+  font-size: 1.2rem;
+}
+
+/* Fix icon position for the 80% centered bar */
+/* Since the input is centered, the absolute icon needs to move too */
+/* Ideally, we center the wrapper instead, but sticking to your CSS change: */
+@media screen and (max-width: 768px) {
+    .search-icon {
+        left: 12%; /* Rough adjustment to match the 10% margin on the left */
+    }
+}
+
+.clear-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #95a5a6;
+  font-weight: bold;
+}
+
+.clear-btn:hover {
+  color: #e74c3c;
+}

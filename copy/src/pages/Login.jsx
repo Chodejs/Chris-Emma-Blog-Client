@@ -26,7 +26,7 @@ const Login = () => {
     setError('');
     
     try {
-      const response = await api.post('/login', {
+      const response = await api.post('/login.php', {
         username: formData.username,
         password: formData.password
       });

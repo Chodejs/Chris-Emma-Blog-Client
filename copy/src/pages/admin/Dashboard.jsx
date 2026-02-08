@@ -11,7 +11,7 @@ const Dashboard = () => {
   // FETCH REAL POSTS
   const fetchPosts = async () => {
     try {
-        const response = await api.get('/posts');
+        const response = await api.get('/post/read.php');
         if (Array.isArray(response.data)) {
             setPosts(response.data);
         } else {
@@ -30,7 +30,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        await api.delete('/post/delete', { data: { id } });
+        await api.delete('/post/delete.php', { data: { id } });
         // Refresh list after delete
         fetchPosts(); 
       } catch (err) {

@@ -1,0 +1,135 @@
+.about-container {
+    padding-bottom: 4rem;
+}
+
+.about-hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: #2c3e50;
+    color: white;
+    margin-bottom: 3rem;
+    border-radius: 0 0 20px 20px;
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    font-family: 'Georgia', serif;
+    margin-bottom: 1rem;
+}
+
+.about-hero p {
+    font-size: 1.2rem;
+    color: #bdc3c7;
+}
+
+.about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.about-section {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    margin-bottom: 5rem;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h2 {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-family: 'Georgia', serif;
+}
+
+.about-text p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #555;
+    font-size: 1.1rem;
+}
+
+.about-image-placeholder {
+    flex: 1;
+    height: 300px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Team Section */
+.team-section {
+    text-align: center;
+}
+
+.team-section h2 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+    font-family: 'Georgia', serif;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+}
+
+.team-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.team-card:hover {
+    transform: translateY(-10px);
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    background-color: #f0f0f0;
+}
+
+.team-card h3 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.role {
+    display: block;
+    color: #e67e22;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.team-card p {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 768px) {
+    .about-section {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .about-image-placeholder {
+        width: 100%;
+    }
+}

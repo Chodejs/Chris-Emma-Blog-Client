@@ -1,19 +1,17 @@
 import { formatDate, decodeHtml } from '../../utils/helpers';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './BlogCard.css';
 
+// 1. DEFINE THE MISSING VARIABLE
 const placeholder = 'https://placehold.co/600x400?text=No+Image';
 
 // Helper to get first image safely
 const getThumbnail = (imgData) => {
-    if (!imgData) return placeholder; // Fallback
+    if (!imgData) return placeholder;
     try {
-        // Try parsing JSON if it's our new format
         const parsed = JSON.parse(imgData);
-        // If it's an array, take the first one. If not, take it as is.
         return Array.isArray(parsed) ? parsed[0] : parsed;
     } catch (e) {
-        // If it crashes, it's just a normal string (Old format)
         return imgData; 
     }
 };
@@ -28,8 +26,11 @@ const BlogCard = ({post}) => {
                     src={thumbnail || placeholder} 
                     alt={post.title} 
                     className="card-image"
-                    // MAGIC FIX: If image fails to load, swap source to placeholder
-                    onError={(e) => { e.target.onerror = null; e.target.src = placeholder; }}
+                    // If image fails, swap to placeholder
+                    onError={(e) => { 
+                        e.target.onerror = null; 
+                        e.target.src = placeholder; 
+                    }}
                 />
                 <span className="card-category">{post.category}</span>
             </div>
@@ -41,7 +42,7 @@ const BlogCard = ({post}) => {
                 </div>
 
                 <h3 className="card-title">{decodeHtml(post.title)}</h3>
-                <p className="card-excerpt">{decodeHtml(post.excerpt)}</p>
+                <p className="card-excerpt">{post.excerpt}</p>
 
                 <Link to={`/post/${post.id}`} className="card-btn">
                     Read More

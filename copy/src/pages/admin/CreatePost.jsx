@@ -27,7 +27,7 @@ const CreatePost = () => {
             const formData = new FormData();
             formData.append('image', file);
 
-            const response = await api.post('/upload', formData, {
+            const response = await api.post('/post/upload.php', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             newImageUrls.push(response.data.url);
@@ -57,7 +57,7 @@ const CreatePost = () => {
     };
 
     try {
-      await api.post('/posts', newPost);
+      await api.post('/post/create.php', newPost);
       alert('Post Published Successfully!');
       navigate('/');
       

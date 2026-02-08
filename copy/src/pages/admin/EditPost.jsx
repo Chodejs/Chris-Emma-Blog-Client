@@ -11,7 +11,7 @@ const EditPost = () => {
   
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('Tech');
-  const [images, setImages] = useState([]); 
+  const [images, setImages] = useState([]); // Array for images
   const [content, setContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -19,12 +19,12 @@ const EditPost = () => {
   useEffect(() => {
     const fetchPost = async () => {
         try {
-            const response = await api.get(`/post?id=${id}`);
+            const response = await api.get(`/post/single_read.php?id=${id}`);
             const post = response.data;
             
-            setTitle(post.title || '');
-            setCategory(post.category || 'Tech');
-            setContent(post.content || post.body || '');
+            setTitle(post.title);
+            setCategory(post.category);
+            setContent(post.content);
 
             // Handle Image Parsing
             if (post.image) {
@@ -61,7 +61,7 @@ const EditPost = () => {
             const formData = new FormData();
             formData.append('image', file);
 
-            const response = await api.post('/upload', formData, {
+            const response = await api.post('/post/upload.php', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             newImageUrls.push(response.data.url);
@@ -97,7 +97,7 @@ const EditPost = () => {
     };
 
     try {
-      await api.put('/posts', updatedPost);
+      await api.put('/post/update.php', updatedPost);
       alert('Post Updated Successfully!');
       navigate('/admin');
       
